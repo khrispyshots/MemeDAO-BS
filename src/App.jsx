@@ -1,4 +1,4 @@
-import { useAddress, useMetamask, useEditionDrop, useToken } from '@thirdweb-dev/react';
+import { useAddress, useMetamask, useEditionDrop, useToken, useVote } from '@thirdweb-dev/react';
 import { useState, useEffect, useMemo } from 'react';
 const App = () => {
   // use the hooks from thirdweb. 
@@ -8,6 +8,7 @@ const App = () => {
 
   const editionDrop = useEditionDrop("0xAa36d5292faF0DC1AFD69d199a97d21ea4CF8E72");
   const token = useToken("0x41f6e7bD06b1e64aa088AACA39D6742C8D8Cd4A7")
+  const vote = useVote("0xef9B9Bfe4ABCc59980cc5B3b9a03D32752E56Aec")
   const [hasClaimedNFT, setHasClaimedNFT] = useState(false);
   const [isClaiming, setIsClaiming] = useState(false);
   // Holds the amount of token each member has in state.
@@ -19,6 +20,58 @@ const App = () => {
   const shortenAddress = (str) => {
     return str.substring(0, 6) + "..." + str.substring(str.length - 4);
   };
+
+  const [proposals, setProposals] = useState([]);
+  const [isVoting, setIsVoting] = useState(false);
+  const [hasVoted, setHasVoted] = useState(false);
+
+  // Retrieve all our existing proposals from the contract.
+  useEffect(() => {
+    if (!hasClaimedNFT) {
+      return;
+    }
+
+    // A simple call to vote.getAll() to grab the proposals.
+    const getAllProposals = async () => {
+      try {
+        const proposals = await vote.getAll();
+        setProposals(proposals);
+        console.log("🌈 Proposals:", proposals);
+      } catch (error) {
+        console.log("failed to get proposals", error);
+      }
+    };
+    getAllProposals();
+  }, [hasClaimedNFT, vote]);
+
+  // We also need to check if the user already voted.
+  useEffect(() => {
+    if (!hasClaimedNFT) {
+      return;
+    }
+
+    // If we haven't finished retrieving the proposals from the useEffect above
+    // then we can't check if the user voted yet!
+    if (!proposals.length) {
+      return;
+    }
+
+    const checkIfUserHasVoted = async () => {
+      try {
+        const hasVoted = await vote.hasVoted(proposals[0].proposalId, address);
+        setHasVoted(hasVoted);
+        if (hasVoted) {
+          console.log("🥵 User has already voted");
+        } else {
+          console.log("🙂 User has not voted yet");
+        }
+      } catch (error) {
+        console.error("Failed to check if wallet has voted", error);
+      }
+    };
+    checkIfUserHasVoted();
+
+  }, [hasClaimedNFT, proposals, address, vote]);
 
   // This useEffect grabs all the addresses of our members holding our NFT.
   useEffect(() => {
