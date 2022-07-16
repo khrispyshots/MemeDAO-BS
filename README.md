@@ -1,11 +1,27 @@
-# buildspace x thirdweb - Build your own DAO with just Javascript
+# MemeDao -- buildspace x thirdweb - 
 
-### **Welcome 👋**
-To get started with this project, clone this repo and follow these commands:
+A simplistic version of DAO (Decentralized Autonomous Organization) where a user can mint a membership NFT and vote on proposals submitted by MemeDAO community to help the Organization in their usage of DAO treasury (a shared bank account) without a central authority.
+## Demo
 
-1. Run `npm install` at the root of your directory
-2. Run `npm start` to start the project
-3. Start coding!
 
-### **Questions?**
-Have some questions make sure you head over to your [buildspace Dashboard](https://app.buildspace.so/projects/COb520aae3-7925-42f4-a5e7-eaf718933766) and link your Discord account so you can get access to helpful channels and your instructor!
+https://meme-dao-bs.vercel.app/
+## Screenshots
+
+![App Screenshot](https://github.com/zainamroti/MemeDAO-BS/blob/main/public/s0.png?raw=true)
+![App Screenshot](https://github.com/zainamroti/MemeDAO-BS/blob/main/public/s2.png?raw=true)
+![App Screenshot](https://github.com/zainamroti/MemeDAO-BS/blob/main/public/s1.png?raw=true)
+![App Screenshot](https://github.com/zainamroti/MemeDAO-BS/blob/main/public/s3.png?raw=true)
+![App Screenshot](https://github.com/zainamroti/MemeDAO-BS/blob/main/public/s4.png?raw=true)
+![App Screenshot](https://github.com/zainamroti/MemeDAO-BS/blob/main/public/s5.png?raw=true)
+
+
+
+## Badges
+
+
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
